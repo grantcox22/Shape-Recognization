@@ -3,10 +3,17 @@
 #include <algorithm>
 #include <vector>
 #include <iostream>
+#include <string>
+#include <fstream>
 #include <random>
 #include <numeric>
 #include <cmath>
 #include <time.h>
+
+#include "../graphics/Graphics.hpp"
+
+#define SAVES "src/saves/"
+#define TRAINING_DATA "src/training data/"
 
 using namespace std;
 
@@ -39,9 +46,17 @@ namespace Network {
             vector<double> run(vector<double> x); // Runs the network
             double back_propigation(vector<double> x, vector<double> y); // Trains Network
 
-            int save_network_to_file(std::string path); // Saves Network to File
-            static MultiLayerNetwork create_from_file(std::string path); // Loads Network from File 
+            int save_network_to_file(std::string src); // Saves Network to File
 
+            double train_from_img_file(std::string src, int iterations, bool print=false);
 
     };
+    
+    MultiLayerNetwork * create_from_file(std::string src); // Loads Network from File
+
+    struct TrainingData {
+        vector<double> in;
+        vector<double> out;
+    } typedef TrainingData;
+
 };

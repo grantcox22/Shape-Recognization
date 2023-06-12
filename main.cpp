@@ -1,23 +1,23 @@
 #include <iostream>
-#include <SFML/Graphics.hpp>
-// #include "./graphics/Window.hpp"
+// #include <SFML/Graphics.hpp>
+// #include "./graphics/Graphics.hpp"
 #include "./network/Network.hpp"
 
 int main() {
 
-    // Window w(600, 300, "Image Recognization");
-    // while (w.getWindow().isOpen()) {
-    //     w.render();
-    //     w.update();
-    // }
+    srand(time(NULL));
+    rand();
 
-    // And Gate Test
-    Network::Neuron n(2);
-    n.set_weights({10, 10, -15});
-    for (int i = 0; i < 4; i++) {
-        double a = i > 1;
-        double b = i % 2;
-        printf("%0.0f %0.0f | %0.4f\n", a, b, n.run({a, b}));
+    Network::MultiLayerNetwork * image_recognizer = Network::create_from_file("save.txt");
+    // double mse = image_recognizer->train_from_img_file("training.txt", 10000, true);
+    // printf("Final MSE: %0.10f\n", mse);
+    image_recognizer->print_weights();
+    image_recognizer->save_network_to_file("save.txt");
+
+    Window w(500, 500, "Image Recognization");
+    while (w.getWindow().isOpen()) {
+        w.render();
+        w.update();
     }
 
     return 0;
